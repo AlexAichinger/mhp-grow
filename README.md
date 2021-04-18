@@ -1,2 +1,1 @@
-# mhp-grow
-MHP Grow Software De
+# MHP Developer Boot Camp
