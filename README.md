@@ -17,7 +17,7 @@ These are the steps you need to take to go ahead and get started with this chall
    <code>git checkout tags/challenge1 -b <branch_name></code>
 
 Our challenge will be to setup the controller needed for our application. The application will be able to take a list of names and go ahead and 
-split the names into a given number of groups by random. So therefore we will need a controller to accept a list of strings and an integer. Go 
+split the list into groups of a given size. Therefore, we will need a controller to accept a list of strings and an integer. Go 
 ahead and get started!
 
 If you need some extra help on how to do it go ahead and follow the step by step bellow:
