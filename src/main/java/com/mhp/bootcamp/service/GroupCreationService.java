@@ -19,12 +19,41 @@ public class GroupCreationService {
     List<Group> groups = new ArrayList<>();
     final AtomicInteger counter = new AtomicInteger();
 
-    final Collection<List<String>> result = names.stream()
-        .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / sizeOfGroups))
-        .values();
-
-    result.forEach(it -> groups.add(new Group(it)));
-
+    for (String name : names) {
+      if (counter.getAndIncrement() % sizeOfGroups == 0) {
+        groups.add(new Group(new ArrayList<>()));
+      }
+      List<String> group = getSubList(
+          groups.get(groups.size() - 1).getNames(), 0,
+          groups.get(groups.size() - 1).getNames().size(), groups.get(groups.size() - 1).getNames().size()
+      );
+      group.add(name);
+      groups.get(groups.size() - 1).setNames(group);
+    }
     return groups;
+  }
+
+  private List<String> getSubList(List<String> array, int fromIndex, int toIndex, int size) {
+    if (fromIndex < 0)
+      throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
+    if (toIndex > size)
+      throw new IndexOutOfBoundsException("toIndex = " + toIndex);
+    if (fromIndex > toIndex)
+      throw new IllegalArgumentException("fromIndex(" + fromIndex +
+          ") > toIndex(" + toIndex + ")");
+
+    List<String> subList = new ArrayList<>();
+    int index = 0;
+
+    for (String entry : array) {
+      if(index >= fromIndex && index < toIndex) {
+        subList.add(entry);
+        index++;
+      } else {
+        break;
+      }
+    }
+
+    return subList;
   }
 }
