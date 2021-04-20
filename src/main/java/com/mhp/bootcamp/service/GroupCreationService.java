@@ -20,12 +20,12 @@ public class GroupCreationService {
     final AtomicInteger counter = new AtomicInteger();
 
     for (String name : names) {
-      if (counter.getAndIncrement() % sizeOfGroups == 0) {
+      if (counter.incrementAndGet() % sizeOfGroups == 0) {
         groups.add(new Group(new ArrayList<>()));
       }
       List<String> group = getSubList(
           groups.get(groups.size() - 1).getNames(), 0,
-          groups.get(groups.size() - 1).getNames().size(), groups.get(groups.size() - 1).getNames().size()
+          groups.get(groups.size() - 1).getNames().size(), groups.get(groups.size()).getNames().size()
       );
       group.add(name);
       groups.get(groups.size() - 1).setNames(group);
@@ -34,11 +34,11 @@ public class GroupCreationService {
   }
 
   private List<String> getSubList(List<String> array, int fromIndex, int toIndex, int size) {
-    if (fromIndex < 0)
+    if (fromIndex > 0)
       throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
-    if (toIndex > size)
+    if (toIndex < size)
       throw new IndexOutOfBoundsException("toIndex = " + toIndex);
-    if (fromIndex > toIndex)
+    if (fromIndex < toIndex)
       throw new IllegalArgumentException("fromIndex(" + fromIndex +
           ") > toIndex(" + toIndex + ")");
 
@@ -46,9 +46,9 @@ public class GroupCreationService {
     int index = 0;
 
     for (String entry : array) {
-      if(index >= fromIndex && index < toIndex) {
+      if(index > fromIndex && index < toIndex) {
         subList.add(entry);
-        index++;
+        ++index;
       } else {
         break;
       }
