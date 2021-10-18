@@ -74,3 +74,11 @@ ahead fix. Teak the logic of the application to return the value that the unit t
 For help reach out to us or go ahead and ask your virtual neighbor if they could help.
 
 <b>Disclaimer:</b> this code does not follow any best practices and was created to make for an interesting challenge.
+
+
+
+## Docker Setup
+<code>docker run -d -p 4567:4567 mhp-grow</code>
+
+## Swagger
+http://localhost:4567/swagger-ui/
